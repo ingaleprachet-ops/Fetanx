@@ -3,6 +3,9 @@
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
+
+const socket = io();
+
 ctx.imageSmoothingEnabled = false;
 
 
@@ -63,6 +66,10 @@ const tank = {
     alive: true,
     respawnTimer: 0
 };
+
+
+const WORLD_WIDTH = 3000;
+const WORLD_HEIGHT = 3000;
 
 let kills = 0;
 let deaths = 0;
@@ -311,6 +318,12 @@ function roundRect(x, y, w, h, r, color) {
     ctx.fill();
 }
 function loop() {
+const cameraX = tank.x - canvas.width / 2;
+const cameraY = tank.y - canvas.height / 2;
+
+ctx.save();
+ctx.translate(-cameraX, -cameraY);
+
     // Background
 ctx.fillStyle = "#5A8F47";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -848,6 +861,8 @@ if (reloadTimer > 0) {
 ctx.fillStyle = "#FFD54A";
 ctx.font = "bold 18px monospace";
 ctx.textAlign = "left";
+
+ctx.restore();
 
 ctx.fillText(`Score: ${score}`, 20, 40);
 ctx.fillText(`Deaths: ${deaths}`, 20, 70);
