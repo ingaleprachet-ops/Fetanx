@@ -97,8 +97,10 @@ const enemyBullets = [];
 let towerShootTimer = 0;
 
 canvas.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    const rect = canvas.getBoundingClientRect();
+
+mouseX = e.clientX - rect.left;
+mouseY = e.clientY - rect.top;
 });
 
 // ===== MOBILE CONTROLS =====
@@ -202,8 +204,8 @@ function updateMovement() {
     } else {
 
         // PC
-        const dx = mouseX - tank.x;
-        const dy = mouseY - tank.y;
+        const dx = mouseX - canvas.width / 2;
+const dy = mouseY - canvas.height / 2;
 
         const distance =
             Math.sqrt(dx * dx + dy * dy);
@@ -231,15 +233,15 @@ function updateMovement() {
         }
     }
 
-    tank.x = Math.max(
-        25,
-        Math.min(canvas.width - 25, tank.x)
-    );
+   tank.x = Math.max(
+    25,
+    Math.min(WORLD_WIDTH - 25, tank.x)
+);
 
-    tank.y = Math.max(
-        15,
-        Math.min(canvas.height - 15, tank.y)
-    );
+tank.y = Math.max(
+    25,
+    Math.min(WORLD_HEIGHT - 25, tank.y)
+);
 }
 // ===== PART 3 =====
 // Main Loop + Drawing + Multiplayer HP Sync
@@ -251,32 +253,32 @@ const grassPatches = [];
 
 for (let i = 0; i < 20; i++) {
     trees.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+    x: Math.random() * WORLD_WIDTH,
+    y: Math.random() * WORLD_HEIGHT,
         size: 18 + Math.random() * 8
     });
 }
 
 for (let i = 0; i < 35; i++) {
     rocks.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * WORLD_WIDTH,
+    y: Math.random() * WORLD_HEIGHT,
         size: 8 + Math.random() * 10
     });
 }
 
 for (let i = 0; i < 50; i++) {
     bushes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * WORLD_WIDTH,
+    y: Math.random() * WORLD_HEIGHT,
         size: 12 + Math.random() * 8
     });
 }
 
 for (let i = 0; i < 250; i++) {
     grassPatches.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height
+        x: Math.random() * WORLD_WIDTH,
+    y: Math.random() * WORLD_HEIGHT,
     });
 }
 
@@ -318,11 +320,6 @@ function roundRect(x, y, w, h, r, color) {
     ctx.fill();
 }
 function loop() {
-const cameraX = tank.x - canvas.width / 2;
-const cameraY = tank.y - canvas.height / 2;
-
-ctx.save();
-ctx.translate(-cameraX, -cameraY);
 
     // Background
 ctx.fillStyle = "#5A8F47";
@@ -862,8 +859,6 @@ ctx.fillStyle = "#FFD54A";
 ctx.font = "bold 18px monospace";
 ctx.textAlign = "left";
 
-ctx.restore();
-
 ctx.fillText(`Score: ${score}`, 20, 40);
 ctx.fillText(`Deaths: ${deaths}`, 20, 70);
 
@@ -877,7 +872,6 @@ socket.on("players", (serverPlayers) => {
     players = serverPlayers;
 
     if (players[socket.id]) {
-        tank.hp = players[socket.id].hp;
         tank.alive = players[socket.id].hp > 0;
     }
 });
@@ -1065,4 +1059,3 @@ tank.y = canvas.height / 2;
 }
 
 loop();
-
