@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>FETANX</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="menu">
+        <h1>FETANX</h1>
+
+        <input
+            id="nameInput"
+            type="text"
+            placeholder="Enter Name"
+            maxlength="16"
+        >
+
+        <button id="playBtn">
+            PLAY
+        </button>
+    </div>
+
+    <canvas id="game"></canvas>
+
+<div id="joystick">
+    <div id="stick"></div>
+</div>
+
+<button id="shootBtn">FIRE</button>
+
+<script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+
+</body>
+</html>

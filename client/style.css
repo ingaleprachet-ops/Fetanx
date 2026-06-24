@@ -1,0 +1,280 @@
+body{
+    margin:0;
+    overflow:hidden;
+    background:#111;
+    font-family:'Press Start 2P', cursive;
+}
+
+canvas{
+    display:block;
+}
+
+#menu{
+    backdrop-filter: blur(4px);
+    position:absolute;
+    inset:0;
+    background-color:rgba(0,0,0,.25);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+
+    background-image:url("bg.png");
+    background-size:cover;
+    background-position:center;
+}
+#menu h1{
+    color:#FFD54A;
+    font-size:56px;
+    text-shadow:
+        0 0 10px rgba(255,213,74,.5),
+        4px 4px #3a2200;
+
+    letter-spacing:4px;
+}
+
+#nameInput{
+
+    border-radius:14px;
+    box-shadow:0 0 15px rgba(255,213,74,.15);
+
+    width:300px;
+    padding:15px;
+
+    border:3px solid #8b5a2b;
+    background:#2b1d0e;
+    color:#f5deb3;
+
+    font-size:14px;
+    text-align:center;
+
+    font-family:'Press Start 2P', cursive;
+}
+
+#playBtn{
+    padding:16px 36px;
+    border:none;
+    border-radius:18px;
+    font-family:'Press Start 2P', cursive;
+    background:#FFD54A;
+    color:#222;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    box-shadow:
+    0 6px 0 #B0892D,
+    0 0 20px rgba(255,213,74,.3);
+
+    transition:.15s;
+
+    border-radius:14px;
+box-shadow:0 0 20px rgba(255,213,74,.25);
+}
+
+#playBtn:hover{
+    transform:translateY(-2px);
+}
+
+#playBtn:active{
+    transform:translateY(4px);
+}
+
+#joystick{
+    position:fixed;
+    left:30px;
+    bottom:30px;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    display:none;
+    touch-action:none;
+}
+
+#stick{
+    position:absolute;
+    left:35px;
+    top:35px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.7);
+}
+
+#shootBtn{
+    position:fixed;
+    right:30px;
+    bottom:40px;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border:none;
+    background:red;
+    color:white;
+    font-size:18px;
+    display:none;
+}
+
+#shootBtn:hover{
+    transform:scale(1.05);
+}
+
+#joystick,
+#shootBtn{
+    display:none;
+}
+
+body.mobile-controls #joystick,
+body.mobile-controls #shootBtn{
+    display:block;
+}
+
+#subtitle{
+    
+    color:#d8c28a;
+    font-size:12px;
+    text-shadow:2px 2px #000;
+    margin-top:-10px;
+}
+
+#subtitle{
+    font-family:'Press Start 2P', cursive;
+}
+
+#playBtn{
+    box-shadow:0 0 20px rgba(255,215,0,.4);
+}
+
+#nameInput{
+    border-radius:16px;
+box-shadow:0 0 15px rgba(255,213,74,.15);
+    box-shadow:0 0 12px rgba(255,255,255,.1);
+}
+
+#shootBtn{
+    position:fixed;
+    right:30px;
+    bottom:40px;
+
+    width:100px;
+    height:100px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#FF4444;
+    color:white;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 25px rgba(255,68,68,.5);
+
+    display:none;
+}
+
+#menu::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at center,
+    rgba(255,213,74,.08),
+    transparent 60%);
+    pointer-events:none;
+}
+
+#joystick{
+    border:2px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(4px);
+}
+
+#stick{
+    box-shadow:
+    0 0 15px rgba(255,255,255,.4);
+}
+
+canvas{
+    cursor: crosshair;
+}
+
+body{
+    background:
+    linear-gradient(
+        180deg,
+        #1b1b1b,
+        #111
+    );
+}
+
+#menu{
+    position:absolute;
+    overflow:hidden;
+}
+
+#menu::after{
+    content:"";
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,213,74,.05);
+
+    top:-150px;
+    right:-150px;
+
+    pointer-events:none;
+}
+
+.hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+
+    background:rgba(0,0,0,.4);
+    border:2px solid #FFD54A;
+    border-radius:12px;
+
+    padding:10px 15px;
+}
+
+#nameInput{
+    border-radius:12px;
+}
+
+#playBtn{
+    border-radius:12px;
+}
+
+#playBtn:hover{
+    box-shadow:0 0 20px rgba(255,213,74,.6);
+}
+
+#menu{
+    animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+#nameInput:focus{
+    outline:none;
+    border-color:#FFD54A;
+    box-shadow:0 0 20px rgba(255,213,74,.4);
+}
