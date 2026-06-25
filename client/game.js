@@ -1035,20 +1035,22 @@ if (!tank.alive) {
 
     if (tank.respawnTimer <= 0) {
 
-        tank.alive = true;
-        tank.hp = 1000;
+    tank.alive = true;
+    tank.hp = 1000;
 
-        tank.x = 80;
-        tank.y = canvas.height / 2;
+    tank.x = 80;
+    tank.y = canvas.height / 2;
 
-        socket.emit("updatePlayer", {
-            x: tank.x,
-            y: tank.y,
-            angle: tank.angle,
-            hp: 1000,
-            name: playerName
-        });
-    }
+    socket.emit("updatePlayer", {
+        x: tank.x,
+        y: tank.y,
+        angle: tank.angle,
+        hp: 1000,
+        name: playerName
+    });
+
+    tank.respawnTimer = 180;
+}
 }
 
 } // closes updateBullets()

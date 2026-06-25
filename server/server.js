@@ -27,37 +27,34 @@ io.on("connection", (socket) => {
   io.emit("players", players);
 
   socket.on("updatePlayer", (data) => {
-  if (players[socket.id]) {
-    players[socket.id].x = data.x;
-    players[socket.id].y = data.y;
-    players[socket.id].angle = data.angle;
-    players[socket.id].name = data.name;
-    
+    if (players[socket.id]) {
 
-    io.emit("players", players);
-  }
+        players[socket.id].x = data.x;
+        players[socket.id].y = data.y;
+        players[socket.id].angle = data.angle;
+        players[socket.id].name = data.name;
+
+        if (data.hp !== undefined) {
+            players[socket.id].hp = data.hp;
+        }
+
+        io.emit("players", players);
+    }
 });
 
 socket.on("shoot", (bullet) => {
   socket.broadcast.emit("shoot", bullet);
 });
 socket.on("hitPlayer", (targetId) => {
-  if (!players[targetId]) return;
+    if (!players[targetId]) return;
 
-  players[targetId].hp -= 250;
+    players[targetId].hp -= 250;
 
-if (players[targetId].hp < 0) {
-    players[targetId].hp = 0;
-}
+    if (players[targetId].hp <= 0) {
+        players[targetId].hp = 0;
+    }
 
-  io.emit("players", players);
-});
-  socket.on("disconnect", () => {
-  console.log("Player left:", socket.id);
-
-  delete players[socket.id];
-
-  io.emit("players", players);
+    io.emit("players", players);
 });
 });
 
