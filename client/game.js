@@ -204,8 +204,8 @@ function updateMovement() {
     } else {
 
         // PC
-        const dx = mouseX - canvas.width / 2;
-const dy = mouseY - canvas.height / 2;
+        const dx = mouseX - tank.x;
+const dy = mouseY - tank.y;
 
         const distance =
             Math.sqrt(dx * dx + dy * dy);
@@ -941,7 +941,7 @@ if (Math.sqrt(dx * dx + dy * dy) < 30) {
             Math.abs(b.y - tank.y) < 15
         ) {
 
-            tank.hp -= 250;
+            //tank.hp -= 250;
             tank.hp = Math.max(0, tank.hp);
 
             bullets.splice(i, 1);
@@ -1021,7 +1021,7 @@ ctx.shadowBlur = 0;
     Math.abs(b.y - tank.y) < 15
 ) {
 
-        tank.hp -= 25;
+        //tank.hp -= 25;
         if (tank.hp <= 0) {
     tank.hp = 0;
     tank.alive = false;
