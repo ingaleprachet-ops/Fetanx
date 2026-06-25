@@ -46,11 +46,9 @@ socket.on("hitPlayer", (targetId) => {
 
   players[targetId].hp -= 250;
 
-  if (players[targetId].hp <= 0) {
-    players[targetId].hp = 1000;
-    players[targetId].x = 400;
-    players[targetId].y = 300;
-  }
+if (players[targetId].hp < 0) {
+    players[targetId].hp = 0;
+}
 
   io.emit("players", players);
 });
