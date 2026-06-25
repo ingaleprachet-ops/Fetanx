@@ -58,7 +58,7 @@ const tank = {
     angle: 0,
 
     speed: 0,
-    maxSpeed: 3,
+    maxSpeed: 2.2,
     accel: 0.05,
 
     hp: 1000,
@@ -68,8 +68,8 @@ const tank = {
 };
 
 
-const WORLD_WIDTH = 3000;
-const WORLD_HEIGHT = 3000;
+const WORLD_WIDTH = 1500;
+const WORLD_HEIGHT = 900;
 
 let kills = 0;
 let deaths = 0;
@@ -322,7 +322,14 @@ function roundRect(x, y, w, h, r, color) {
 function loop() {
 
     // Background
-ctx.fillStyle = "#5A8F47";
+ctx.save();
+
+const camX = tank.x - canvas.width / 2;
+const camY = tank.y - canvas.height / 2;
+
+ctx.translate(-camX, -camY);
+
+    ctx.fillStyle = "#5A8F47";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 // Grid
@@ -862,6 +869,12 @@ ctx.textAlign = "left";
 ctx.fillText(`Score: ${score}`, 20, 40);
 ctx.fillText(`Deaths: ${deaths}`, 20, 70);
 
+
+ctx.strokeStyle = "#00FFFF";
+ctx.lineWidth = 8;
+ctx.strokeRect(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+
+ctx.restore();
 requestAnimationFrame(loop);
 }
 // ===== PART 4 =====
