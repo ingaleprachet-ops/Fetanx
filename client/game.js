@@ -872,8 +872,9 @@ socket.on("players", (serverPlayers) => {
     players = serverPlayers;
 
     if (players[socket.id]) {
-        tank.alive = players[socket.id].hp > 0;
-    }
+    tank.hp = players[socket.id].hp;
+    tank.alive = players[socket.id].hp > 0;
+}
 });
 
 // Receive bullets
