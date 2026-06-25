@@ -828,7 +828,7 @@ ctx.strokeText(
             x: tank.x,
             y: tank.y,
             angle: tank.angle,
-            hp: tank.hp,
+            
             name: playerName
         });
     }
@@ -1042,7 +1042,6 @@ ctx.shadowBlur = 0;
     x: tank.x,
     y: tank.y,
     angle: tank.angle,
-    hp: tank.hp,
     name: playerName
 });
 

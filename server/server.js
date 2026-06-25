@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
     players[socket.id].y = data.y;
     players[socket.id].angle = data.angle;
     players[socket.id].name = data.name;
-    players[socket.id].hp = data.hp;
+    
 
     io.emit("players", players);
   }
