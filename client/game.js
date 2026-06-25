@@ -1021,19 +1021,12 @@ ctx.shadowBlur = 0;
     Math.abs(b.y - tank.y) < 15
 ) {
 
-        //tank.hp -= 25;
-        if (tank.hp <= 0) {
-    tank.hp = 0;
-    tank.alive = false;
-    tank.respawnTimer = 180;
+    socket.emit("hitPlayer", socket.id);
+
+    enemyBullets.splice(i, 1);
+
+    continue;
 }
-
-        tank.hp = Math.max(0, tank.hp);
-
-        enemyBullets.splice(i, 1);
-
-        continue;
-    }
 }
     // Respawn
     if (!tank.alive) {
