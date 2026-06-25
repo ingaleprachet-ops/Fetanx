@@ -941,8 +941,8 @@ if (Math.sqrt(dx * dx + dy * dy) < 30) {
             Math.abs(b.y - tank.y) < 15
         ) {
 
-            //tank.hp -= 250;
-            tank.hp = Math.max(0, tank.hp);
+            tank.hp -= 250;
+tank.hp = Math.max(0, tank.hp);
 
             bullets.splice(i, 1);
 
@@ -1029,26 +1029,30 @@ ctx.shadowBlur = 0;
 }
 }
     // Respawn
-    if (!tank.alive) {
+if (!tank.alive) {
 
-        tank.respawnTimer--;
+    tank.respawnTimer--;
 
-        if (tank.respawnTimer <= 0) {
+    if (tank.respawnTimer <= 0) {
 
-            tank.alive = true;
-            tank.hp = 1000;
+        tank.alive = true;
+        tank.hp = 1000;
 
-            socket.emit("updatePlayer", {
-    x: tank.x,
-    y: tank.y,
-    angle: tank.angle,
-    name: playerName
-});
+        tank.x = 80;
+        tank.y = canvas.height / 2;
 
-            tank.x = 80;
-tank.y = canvas.height / 2;
-        }
+        socket.emit("updatePlayer", {
+            x: tank.x,
+            y: tank.y,
+            angle: tank.angle,
+            hp: 1000,
+            name: playerName
+        });
     }
 }
+
+} // closes updateBullets()
+
+
 
 loop();
