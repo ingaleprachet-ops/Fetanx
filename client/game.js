@@ -204,33 +204,15 @@ function updateMovement() {
     } else {
 
         // PC
-        const dx = mouseX - tank.x;
-const dy = mouseY - tank.y;
+        const dx = mouseX - canvas.width / 2;
+const dy = mouseY - canvas.height / 2;
 
-        const distance =
-            Math.sqrt(dx * dx + dy * dy);
+tank.angle = Math.atan2(dy, dx);
 
-        tank.angle =
-            Math.atan2(dy, dx);
-
-        if (distance > 20) {
-
-            tank.speed = Math.min(
-                tank.speed + tank.accel,
-                tank.maxSpeed
-            );
-
-            tank.x +=
-                Math.cos(tank.angle) *
-                tank.speed;
-
-            tank.y +=
-                Math.sin(tank.angle) *
-                tank.speed;
-
-        } else {
-            tank.speed = 0;
-        }
+if (Math.sqrt(dx * dx + dy * dy) > 20) {
+    tank.x += Math.cos(tank.angle) * tank.maxSpeed;
+    tank.y += Math.sin(tank.angle) * tank.maxSpeed;
+}
     }
 
    tank.x = Math.max(
@@ -322,12 +304,7 @@ function roundRect(x, y, w, h, r, color) {
 function loop() {
 
     // Background
-ctx.save();
 
-const camX = tank.x - canvas.width / 2;
-const camY = tank.y - canvas.height / 2;
-
-ctx.translate(-camX, -camY);
 
     ctx.fillStyle = "#5A8F47";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -870,11 +847,10 @@ ctx.fillText(`Score: ${score}`, 20, 40);
 ctx.fillText(`Deaths: ${deaths}`, 20, 70);
 
 
-ctx.strokeStyle = "#00FFFF";
-ctx.lineWidth = 8;
-ctx.strokeRect(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
 
-ctx.restore();
+
+
+
 requestAnimationFrame(loop);
 }
 // ===== PART 4 =====
@@ -1052,7 +1028,7 @@ if (!tank.alive) {
     tank.hp = 1000;
 
     tank.x = 80;
-    tank.y = canvas.height / 2;
+    tank.y = WORLD_HEIGHT / 2;
 
     socket.emit("updatePlayer", {
         x: tank.x,
